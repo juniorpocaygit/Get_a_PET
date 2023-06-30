@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 
 //helpers
 const createUserToken = require('../helpers/create-user-token')
-const getToken = require('../helpers/get-token')
+
 
 module.exports = class UserController{
     static async register(req, res){
@@ -106,6 +106,25 @@ module.exports = class UserController{
             currentUser = null
         }
         res.status(200).send(currentUser)
+    }
 
+    static async getUserById(req, res){
+        const id = req.params.id
+        if (id.length != 24) {
+            res.status(422).json({message: 'ID inválido, ele deve conter 24 caracteres.',})
+            return
+        }
+
+        const user = await User.findById(id).select('-password')  
+        if (!user) {
+            res.status(422).json({message: 'Usuário não encontrado.',})
+            return
+        }
+        res.status(200).json({ user })
+    }
+
+    static async editUser(req, res){
+        
+        return res.status(200).json({message: 'Deu certo o update',})
     }
 }

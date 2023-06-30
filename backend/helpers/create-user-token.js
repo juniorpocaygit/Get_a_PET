@@ -16,7 +16,5 @@ const createUserToken = async (user, req, res) =>{
     token: token,
     userId: user._id,
     })
-
-
 }
 module.exports = createUserToken
