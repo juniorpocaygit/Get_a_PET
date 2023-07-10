@@ -5,8 +5,8 @@ import formStyles from './Form.module.css'
 import Input from "./Input"
 import Select from "./Select"
 
-function PetForm({handleSubmit, petdata, btnText}) {
-    const [pet, setPet] = useState(petdata || {})
+function PetForm({handleSubmit, petData, btnText}) {
+    const [pet, setPet] = useState(petData || {})
     const [preview, setPreview] = useState([])
     const colors = ['Branco', 'Preto', 'Cinza', 'Caramelo', 'Mesclado']
 
@@ -37,7 +37,7 @@ function PetForm({handleSubmit, petdata, btnText}) {
             )
             : pet.images && pet.images.map((image, index) => 
                 <img 
-                src={`${process.envREAC_APP_API}/images/pets/${image}`}
+                src={`${process.env.REACT_APP_API}/images/pets/${image}`}
                 alt={pet.name}
                 key={`${pet.name}+${index}`}
                 />
